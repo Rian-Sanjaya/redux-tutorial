@@ -5,11 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // create store
-import { combineReducers, createStore } from 'redux'
-// Provider to give access the app to the store
-import { Provider } from 'react-redux'
-import productsReducer from './reducers/products-reducer'
-import userReducer from './reducers/user-reducer'
+import { combineReducers, createStore } from 'redux';
+// Provider give access store to the app
+import { Provider } from 'react-redux';
+import productsReducer from './reducers/products-reducer';
+import userReducer from './reducers/user-reducer';
 
 const allReducers = combineReducers({
     products: productsReducer,
