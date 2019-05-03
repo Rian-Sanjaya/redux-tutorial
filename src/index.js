@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// create store
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+// Provider give access store to the app
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// create store
-import { combineReducers, createStore } from 'redux';
-// Provider give access store to the app
-import { Provider } from 'react-redux';
 import productsReducer from './reducers/products-reducer';
 import userReducer from './reducers/user-reducer';
 
@@ -15,6 +16,11 @@ const allReducers = combineReducers({
     products: productsReducer,
     user: userReducer
 });
+
+const storeEnhancers = compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 // need to pass reducer into createStore
 // to pre-populate the store, we pass in the initial state as the sedond argument
@@ -24,7 +30,7 @@ const store = createStore(
         products: [{name: 'iPhone'}],
         user: 'Micheal'
     },
-    window.devToolsExtension && window.devToolsExtension()
+    storeEnhancers
 );
 
 // Provider give the app access to the store
